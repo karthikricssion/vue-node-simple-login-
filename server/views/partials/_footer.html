@@ -1,0 +1,149 @@
+<script src="/static/lib/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/tether/dist/js/tether.min.js"></script>
+<script src="/static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/lib/less/dist/less.min.js"></script>
+<script src="/static/lib/moment/moment.js"></script>
+<script src="/static/lib/axios/dist/axios.min.js"></script>
+<script src="/static/lib/vue/dist/vue.min.js"></script>
+<script src="/static/lib/vue-router/dist/vue-router.min.js"></script>
+<script src="/static/js/models/user.js"></script>
+
+<script>
+  var app = new Vue({
+    el: "#login",
+    data() {
+      return {
+        active_box: 'login',
+        register: new User({}),
+        loginUser: new User({}),
+        emailAvailable: false,
+        usernameAvailable: false,
+        emailValidate: false,
+        usernameValidate: false,
+        passwordValidate: false,
+        showErrorMessage: false,
+        errorDataMessage: null
+      }
+    },
+    mounted() {
+      
+    },
+    template: `
+      <div class="container">
+        <div class="login-box-outer-wrapper">
+          <div class="login-sign-up-box" v-bind:class="{ active: active_box === 'login' }">
+            <div class="error-message-box" v-if="showErrorMessage">
+              Incorrect user name or password
+            </div>
+            <div class="login-box">
+              <form autocomplete="off" onsubmit="return false">
+                <div class="form-group">
+                  <input type="text" v-model="loginUser.username" autocomplete="new-username" aria-hidden="true" autocorrect="off" autocapitalize="off" class="form-control" placeholder="Username">
+                </div>
+                <div class="form-group">
+                  <input type="password" v-model="loginUser.password" autocomplete="new-password" aria-hidden="true" autocorrect="off" autocapitalize="off" class="form-control" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary" v-on:click="login()">Sign in</button>
+              </form>
+              <div class="have-account-text">
+                Don't have a account? <span v-on:click="toggle('signup')">Sign Up Now</span>
+              </div>
+            </div>
+
+            <div class="sign-up-box">
+              <form autocomplete="off" onsubmit="return false">
+                <div class="form-group">
+                  <input type="email" v-model="register.email" v-on:keyup="checkEmail()" autocomplete="new-email" aria-hidden="true" autocorrect="off" autocapitalize="off" class="form-control" placeholder="Email">
+                  <span class="message-box available" v-if="emailAvailable && emailValidate">Email address available</span>
+                  <span class="message-box" v-if="!emailAvailable && emailValidate">Email address not available</span>
+                </div>
+                <div class="form-group">
+                  <input type="text" v-model="register.username" v-on:keyup="checkUsername()" autocomplete="new-text" aria-hidden="true" autocorrect="off" autocapitalize="off" class="form-control" placeholder="Username">
+                  <span class="message-box available" v-if="usernameAvailable && usernameValidate">Username available</span>
+                  <span class="message-box" v-if="!usernameAvailable && usernameValidate">Username not available</span>
+                </div>
+                <div class="form-group">
+                  <input type="password" v-on:keyup="checkPassword()" v-model="register.password" autocomplete="new-password" aria-hidden="true" autocorrect="off" autocapitalize="off" class="form-control" placeholder="Password" required>
+                  <small class="form-text text-muted">Must be minmum of 6 characters</small>
+                </div>
+                <button type="submit" v-bind:class="{ active: emailAvailable && usernameAvailable && passwordValidate}" class="btn btn-primary" v-on:click="signup()">Sign up</button>
+              </form>
+              <div class="have-account-text">
+                Have a account? <span v-on:click="toggle('login')">Login</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+    methods: {
+      validateEmail: function(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email.toLowerCase());
+      },
+      toggle: function(view) {
+        this.active_box = view
+      },
+      signup: function() {
+        if(this.emailAvailable && this.usernameAvailable) {
+          this.register.register().then((data) => {
+            console.log(data)
+          }, (err) => {
+            console.log('Error creating user')
+          })
+        }
+      },
+      login: function(){
+        this.loginUser.login().then((data) => {
+          if(!data.auth) {
+            this.errorDataMessage = data.messsage
+            this.showErrorMessage = true
+          }
+        }, (err) => {
+          console.log('Error creating user')
+        })
+      },
+      checkEmail: function(){
+        if(this.validateEmail(this.register.email)){
+          this.register.checkEmail().then((data) => {
+            this.emailValidate = true
+            if(data.available) {
+              this.emailAvailable = true
+            } else {
+              this.emailAvailable = false 
+            }
+          }, (err) => {
+            console.log('Error in checking email')
+          })
+        } else {
+          this.emailAvailable = false 
+          this.emailValidate = false
+        }
+      },
+      checkUsername: function(){
+        if(this.register.username != '' && this.register.username != null && this.register.username.length > 4) {
+          this.register.checkUsername().then((data) => {
+            this.usernameValidate = true
+            if(data.available) {
+              this.usernameAvailable = true
+            } else {
+              this.usernameAvailable = false 
+            }
+          }, (err) => {
+            console.log('Error in checking usernameAvailable')
+          })
+        } else {
+          this.usernameAvailable = false
+          this.usernameValidate = false
+        }
+      },
+      checkPassword: function() {
+        if(this.register.password != '' && this.register.password != null && this.register.password.length > 6){
+          this.passwordValidate = true
+        } else {
+          this.passwordValidate = false
+        }
+      }
+    }
+  })
+</script>

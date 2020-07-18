@@ -1,0 +1,36 @@
+<script src="/static/lib/jquery/dist/jquery.min.js"></script>
+<script src="/static/lib/tether/dist/js/tether.min.js"></script>
+<script src="/static/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/static/lib/less/dist/less.min.js"></script>
+<script src="/static/lib/moment/moment.js"></script>
+<script src="/static/lib/axios/dist/axios.min.js"></script>
+<script src="/static/lib/vue/dist/vue.min.js"></script>
+<script src="/static/lib/vue-router/dist/vue-router.min.js"></script>
+
+<!-- other lib -->
+<script src="/static/lib/vee-validate.js"></script>
+
+<script src="/static/js/config.js"></script>
+<script src="/static/js/constant.js"></script>
+<script src="/static/js/main.js"></script>
+
+<!-- models -->
+<script src="/static/js/models/common.js"></script>
+<script src="/static/js/models/user.js"></script>
+
+<!-- components -->
+<script src="/static/js/components/google.login.component.js"></script>
+
+<!-- router view -->
+<script src="/static/js/router_view_components/home.js"></script>
+
+<!-- router -->
+<script src="/static/js/router.js"></script>
+
+<script>
+  var app = new Vue({
+    router
+  }).$mount('#app')
+
+  Vue.use(VeeValidate);
+</script>

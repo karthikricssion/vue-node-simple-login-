@@ -1,0 +1,51 @@
+<html lang="en">
+  <head>
+    <meta name="google-signin-scope" content="profile email">
+    <link rel="stylesheet" href="lib/tether/dist/css/tether.min.css"/>
+    <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet/less" type="text/css" href="less/index.less" />
+  </head>
+  <body>
+    <div id="app">
+      <router-view></router-view>
+    </div>
+
+    <script src="lib/jquery/dist/jquery.min.js"></script>
+    <script src="lib/tether/dist/js/tether.min.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/less/dist/less.min.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="lib/axios/dist/axios.min.js"></script>
+    <script src="lib/vue/dist/vue.min.js"></script>
+    <script src="lib/vue-router/dist/vue-router.min.js"></script>
+
+    <!-- other lib -->
+    <script src="lib/vee-validate.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/constant.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- models -->
+    <script src="js/models/common.js"></script>
+    <script src="js/models/user.js"></script>
+
+    <!-- components -->
+    <script src="js/components/google.login.component.js"></script>
+
+    <!-- router view -->
+    <script src="js/router_view_components/login.js"></script>
+    <script src="js/router_view_components/home.js"></script>
+
+    <!-- router -->
+    <script src="js/router.js"></script>
+    
+    <script>
+      var app = new Vue({
+        router
+      }).$mount('#app')
+
+      Vue.use(VeeValidate);
+    </script>
+  </body>
+</html>

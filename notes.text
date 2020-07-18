@@ -1,0 +1,27 @@
+This is going to be sideproject experiment
+i am going to invest
+ -> My 5 morning time for beta version
+ -> My PC
+
+Task management app in house
+
+User login
+User todo -> Create / Edit / Delete
+
+User daily work -> Create / Edit / Delete
+ -> Use should post what the work on the end of the day i.e., while leaving office.
+ -> User can create on the day only
+ -> Editing can be done on the current day
+ -> Delete task can be done on the current day
+ -> If the user missed to create task on the day, Its considered the haven't worked on that day
+    ( Little harsh process, It is going to be for ceratin months. Let's practise and workout)
+
+
+Future plan
+ -> Let user to create topic and invite people to join, all the task created inside that topic is 
+    accessable only to people who is in.
+ -> Notification of people invited / postes 
+ -> Individual Chat
+ -> Annonymus post sharing / comments
+ -> Email integration
+ -> Report generation

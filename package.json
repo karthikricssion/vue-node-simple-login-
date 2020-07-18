@@ -1,0 +1,35 @@
+{
+  "name": "task.management",
+  "version": "1.0.0",
+  "description": "a simple task management app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "task",
+    "topic",
+    "user",
+    "simple",
+    "app"
+  ],
+  "author": "karthikeyan",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "bower": "^1.8.2",
+    "connect-mongo": "^2.0.0",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-nunjucks": "^2.2.3",
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.0-rc1",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.14.7",
+    "nunjucks": "^3.0.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
